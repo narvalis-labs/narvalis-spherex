@@ -1,0 +1,1 @@
+{"state": "done", "progress": 1, "message": "Done", "request": {"target_name": "Barnard's Star", "ra_deg": null, "dec_deg": null, "ref_pmra": null, "ref_pmdec": null, "ref_parallax": null, "ref_epoch": null, "use_gaia": true, "n_controls": 2, "cutout_size_arcsec": null, "max_frames": 137, "collections": null, "pinned_observations": null}}

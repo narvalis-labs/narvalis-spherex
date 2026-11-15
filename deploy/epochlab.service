@@ -1,0 +1,22 @@
+# Alternative to Docker: venv + systemd. Requires Python >= 3.12 (Debian 13 ships 3.13).
+#   python3 -m venv /opt/epochlab/.venv && /opt/epochlab/.venv/bin/pip install -r /opt/epochlab/requirements.txt
+#   cp deploy/epochlab.service /etc/systemd/system/ && systemctl enable --now epochlab
+[Unit]
+Description=EpochLab for SPHEREx
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=epochlab
+WorkingDirectory=/opt/epochlab
+Environment=EPOCHLAB_DATA=/opt/epochlab/data
+Environment=EPOCHLAB_COLLECTIONS=auto
+ExecStart=/opt/epochlab/.venv/bin/uvicorn epochlab.api:app --host 0.0.0.0 --port 8000 --proxy-headers
+Restart=on-failure
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/epochlab/data
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

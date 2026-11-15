@@ -1,0 +1,118 @@
+# EpochLab — real-data validation report
+
+Run: 2026-11-14T21:39:27Z → 2026-11-14T21:58:06Z  
+Collections: auto  
+All numbers below were produced by `scripts/selftest_real.py` on real IRSA SPHEREx data.
+
+## Challenge targets
+
+| Target | Purpose | Images found/used | Primary check | Result | Detail |
+|---|---|---|---|---|---|
+| Barnard's Star | high proper motion | 358/80 | proper_motion_vs_catalogue | **CONSISTENT** | z = (+0.20, -0.54) |
+| eps Ind B | nearby brown dwarf, proper motion | 458/80 | proper_motion_vs_catalogue | **CONSISTENT** | z = (-1.06, -0.33) |
+| WISE J085510.83-071442.5 | coldest known brown dwarf; if detected, expected only at >=3.8 um (hypothesis, docs/REFERENCES.md) | 258/80 | detection | **PASS** | 4/80 epochs at λ 4.22–4.55 µm |
+| RW Aur | young variable star | 335/80 | variability_matched_wavelength | **VARIABLE** | chi2/dof = 1045.4/18, p = 1.38e-210, max/min 3.84, floor 2.0% |
+| R Dra | Mira variable | 2493/80 | variability_matched_wavelength | **INCONCLUSIVE** | only 1 (chi2/dof = 3.7/1); a bright target may be saturated in most exposures |
+
+## All automatic checks per target
+
+### Barnard's Star
+Reference: Gaia DR3 4472832130942575872 · job `d0d365df16bc` · frame status {'ok': 80} · centroid rejections {'S/N': 30}
+Calibration: 80/80 exposures, 120 Gaia field stars (median 21.0 per exposure), astrometric floor 0.220″, photometric floor 0.009460109340984957
+Field-star controls: 51 stars, |z|>3 fraction 0.00, z std 0.71
+Detections at λ = 0.77–5.00 µm (50 epochs)
+
+- **data_provenance**: PASS — 80 frames measured _(rule: every measured frame has archive URL + SHA-256)_
+- **detection**: PASS — 50/80 epochs at λ 0.77–5.00 µm _(rule: centroid S/N >= threshold, at the predicted position, in >= 3 epochs)_
+- **astrometric_calibration**: PASS — 80/80 exposures, median 21 stars, floor 0.22″ _(rule: per-exposure offsets from >= 3 Gaia field stars in >= 3 exposures)_
+- **motion_detected**: YES — p = 0.00e+00, span 1.10 yr _(rule: static-position model rejected at p < 1e-3)_
+- **proper_motion_vs_catalogue**: CONSISTENT — z = (+0.20, -0.54) _(rule: |measured - catalogue| < 3 sigma in both axes)_
+- **variability_matched_wavelength**: POSSIBLE (saturated core) — chi2/dof = 65.4/19, p = 5.17e-07, max/min 3.59, floor 0.9%; signal only in PSF-wing fluxes of a saturated core _(rule: constant flux rejected at p < 1e-3 within same-wavelength bins (errors incl. field-star floor); VARIABLE if max/min >= 1.2 and the rejection is seen in >= 2 bins with aperture photometry; otherwise POSSIBLE (low amplitude / one bin / saturated core))_
+- **photocentre_shift**: NO EVIDENCE — strongest: RA* vs brightness, r = +0.11, p = 1.0e+00 _(rule: position residual vs brightness or wavelength, Pearson p < 1e-3 (4 tests, Bonferroni))_
+- **field_star_controls**: PASS — 51 stars, 0% |z|>3, z std 0.71 _(rule: Gaia field stars through the same pipeline: <=10% with |z|>3 and z spread < 2)_
+- measured µα* = -765 ± 183, µδ = 10265 ± 183 mas/yr; catalogue -801.6, 10362.4; reduced χ² (linear) = 3.19; calibrated: True
+
+### eps Ind B
+Reference: Gaia DR3 6412596012146801152 · job `452fdea58f1b` · frame status {'ok': 80} · centroid rejections {'S/N': 3, 'centroid': 1}
+Calibration: 59/80 exposures, 47 Gaia field stars (median 9.0 per exposure), astrometric floor 0.287″, photometric floor 0.025558196090559093
+Field-star controls: 26 stars, |z|>3 fraction 0.00, z std 0.91
+Detections at λ = 0.89–5.00 µm (76 epochs)
+
+- **data_provenance**: PASS — 80 frames measured _(rule: every measured frame has archive URL + SHA-256)_
+- **detection**: PASS — 76/80 epochs at λ 0.89–5.00 µm _(rule: centroid S/N >= threshold, at the predicted position, in >= 3 epochs)_
+- **astrometric_calibration**: PASS — 59/80 exposures, median 9 stars, floor 0.29″ _(rule: per-exposure offsets from >= 3 Gaia field stars in >= 3 exposures)_
+- **motion_detected**: YES — p = 0.00e+00, span 1.44 yr _(rule: static-position model rejected at p < 1e-3)_
+- **proper_motion_vs_catalogue**: CONSISTENT — z = (-1.06, -0.33) _(rule: |measured - catalogue| < 3 sigma in both axes)_
+- **variability_matched_wavelength**: POSSIBLE (one λ bin) — chi2/dof = 49.4/19, p = 1.60e-04, max/min 1.20, floor 2.6%; driven by one bin (1.78–1.80 µm, n=3) _(rule: constant flux rejected at p < 1e-3 within same-wavelength bins (errors incl. field-star floor); VARIABLE if max/min >= 1.2 and the rejection is seen in >= 2 bins with aperture photometry; otherwise POSSIBLE (low amplitude / one bin / saturated core))_
+- **photocentre_shift**: NO EVIDENCE — strongest: RA* vs wavelength, r = +0.30, p = 3.2e-02 _(rule: position residual vs brightness or wavelength, Pearson p < 1e-3 (4 tests, Bonferroni))_
+- **field_star_controls**: PASS — 26 stars, 0% |z|>3, z std 0.91 _(rule: Gaia field stars through the same pipeline: <=10% with |z|>3 and z spread < 2)_
+- measured µα* = 3911 ± 67, µδ = -2489 ± 68 mas/yr; catalogue 3982.0, -2466.8; reduced χ² (linear) = 0.50; calibrated: True
+
+### WISE J085510.83-071442.5
+Reference: Sesame/S=Simbad, IDIA (via url) WISEA J085510.74-071442.5 · job `293db9dc252b` · frame status {'ok': 80} · centroid rejections {'detection': 17, 'S/N': 59}
+Calibration: 64/80 exposures, 59 Gaia field stars (median 12.5 per exposure), astrometric floor 0.336″, photometric floor 0.0072786477039610276
+Field-star controls: 37 stars, |z|>3 fraction 0.00, z std 0.68
+Detections at λ = 4.22–4.55 µm (4 epochs)
+
+- **data_provenance**: PASS — 80 frames measured _(rule: every measured frame has archive URL + SHA-256)_
+- **detection**: PASS — 4/80 epochs at λ 4.22–4.55 µm _(rule: centroid S/N >= threshold, at the predicted position, in >= 3 epochs)_
+- **astrometric_calibration**: PASS — 64/80 exposures, median 12 stars, floor 0.34″ _(rule: per-exposure offsets from >= 3 Gaia field stars in >= 3 exposures)_
+- **motion_detected**: YES — p = 2.22e-07, span 1.02 yr _(rule: static-position model rejected at p < 1e-3)_
+- **proper_motion_vs_catalogue**: CONSISTENT — z = (+0.84, +0.63) _(rule: |measured - catalogue| < 3 sigma in both axes)_
+- **variability_matched_wavelength**: NO EVIDENCE — chi2/dof = 10.6/12, p = 5.67e-01, max/min 1.00, floor 0.7% _(rule: constant flux rejected at p < 1e-3 within same-wavelength bins (errors incl. field-star floor); VARIABLE if max/min >= 1.2 and the rejection is seen in >= 2 bins with aperture photometry; otherwise POSSIBLE (low amplitude / one bin / saturated core))_
+- **field_star_controls**: PASS — 37 stars, 0% |z|>3, z std 0.68 _(rule: Gaia field stars through the same pipeline: <=10% with |z|>3 and z spread < 2)_
+- measured µα* = -7131 ± 1175, µδ = 1397 ± 1149 mas/yr; catalogue -8123.7, 673.2; reduced χ² (linear) = 0.82; calibrated: True
+
+### RW Aur
+Reference: Gaia DR3 156430817820015232 · job `6a207595ac4b` · frame status {'ok': 80} · centroid rejections {'S/N': 2, 'predicted': 2, 'too': 1}
+Calibration: 80/80 exposures, 120 Gaia field stars (median 21.5 per exposure), astrometric floor 0.242″, photometric floor 0.020013178559347367
+Field-star controls: 53 stars, |z|>3 fraction 0.00, z std 0.69
+Detections at λ = 0.76–4.98 µm (75 epochs)
+
+- **data_provenance**: PASS — 80 frames measured _(rule: every measured frame has archive URL + SHA-256)_
+- **detection**: PASS — 75/80 epochs at λ 0.76–4.98 µm _(rule: centroid S/N >= threshold, at the predicted position, in >= 3 epochs)_
+- **astrometric_calibration**: PASS — 80/80 exposures, median 22 stars, floor 0.24″ _(rule: per-exposure offsets from >= 3 Gaia field stars in >= 3 exposures)_
+- **motion_detected**: YES — p = 1.81e-19, span 1.04 yr _(rule: static-position model rejected at p < 1e-3)_
+- **proper_motion_vs_catalogue**: CONSISTENT — z = (+2.68, +0.56) _(rule: |measured - catalogue| < 3 sigma in both axes)_
+- **variability_matched_wavelength**: VARIABLE — chi2/dof = 1045.4/18, p = 1.38e-210, max/min 3.84, floor 2.0% _(rule: constant flux rejected at p < 1e-3 within same-wavelength bins (errors incl. field-star floor); VARIABLE if max/min >= 1.2 and the rejection is seen in >= 2 bins with aperture photometry; otherwise POSSIBLE (low amplitude / one bin / saturated core))_
+- **photocentre_shift**: DETECTED — strongest: RA* vs wavelength, r = +0.67, p = 1.5e-10 _(rule: position residual vs brightness or wavelength, Pearson p < 1e-3 (4 tests, Bonferroni))_
+- **field_star_controls**: PASS — 53 stars, 0% |z|>3, z std 0.69 _(rule: Gaia field stars through the same pipeline: <=10% with |z|>3 and z spread < 2)_
+- measured µα* = 322 ± 118, µδ = 41 ± 118 mas/yr; catalogue 4.9, -24.6; reduced χ² (linear) = 2.33; calibrated: True
+
+### R Dra
+Reference: Gaia DR3 1648328016354496384 · job `6abfe14f0861` · frame status {'ok': 80} · centroid rejections {'S/N': 32, 'too': 41, 'predicted': 1}
+Calibration: 38/80 exposures, 41 Gaia field stars (median 4.0 per exposure), astrometric floor 0.580″, photometric floor 0.01910692475241582
+Field-star controls: 16 stars, |z|>3 fraction 0.00, z std 0.57
+Detections at λ = 0.75–4.48 µm (6 epochs)
+
+- **data_provenance**: PASS — 80 frames measured _(rule: every measured frame has archive URL + SHA-256)_
+- **detection**: PASS — 6/80 epochs at λ 0.75–4.48 µm _(rule: centroid S/N >= threshold, at the predicted position, in >= 3 epochs)_
+- **astrometric_calibration**: PASS — 38/80 exposures, median 4 stars, floor 0.58″ _(rule: per-exposure offsets from >= 3 Gaia field stars in >= 3 exposures)_
+- **motion_detected**: NO EVIDENCE — p = 8.81e-01, span 0.81 yr _(rule: static-position model rejected at p < 1e-3)_
+- **proper_motion_vs_catalogue**: CONSISTENT — z = (+0.32, +0.88) _(rule: |measured - catalogue| < 3 sigma in both axes)_
+- **variability_matched_wavelength**: INCONCLUSIVE — only 1 (chi2/dof = 3.7/1); a bright target may be saturated in most exposures _(rule: needs >= 3 repeat measurements in common wavelength bins)_
+- **field_star_controls**: PASS — 16 stars, 0% |z|>3, z std 0.57 _(rule: Gaia field stars through the same pipeline: <=10% with |z|>3 and z spread < 2)_
+- measured µα* = 274 ± 933, µδ = 815 ± 920 mas/yr; catalogue -20.6, 6.1; reduced χ² (linear) = 0.53; calibrated: True
+
+## Injection–recovery (synthetic source added to real cutouts)
+
+Injected S/N = matched-filter (optimal) S/N of the injected Gaussian. Detection requires amplitude S/N >= 5 in a 5-parameter Gaussian fit, which is lower: the column *fitted S/N* gives the median measured on these exact frames.
+
+| Injected S/N | Fitted S/N (median) | Epochs recovered | Completeness | Epochs lost, by reason | PM recovered within 3σ |
+|---|---|---|---|---|---|
+| 5 | 0.0 | 0/80 | 0.00 | S/N below threshold: 78, optimizer did not converge: 2 | n/a (<3 epochs) |
+| 8 | 1.7 | 11/80 | 0.14 | S/N below threshold: 67, optimizer did not converge: 2 | True |
+| 12 | 3.0 | 26/80 | 0.33 | S/N below threshold: 53, optimizer did not converge: 1 | True |
+| 16 | 4.3 | 34/80 | 0.42 | S/N below threshold: 46 | True |
+| 20 | 5.7 | 49/80 | 0.61 | S/N below threshold: 31 | True |
+| 30 | 9.3 | 77/80 | 0.96 | S/N below threshold: 3 | True |
+| 40 | 12.9 | 78/80 | 0.97 | S/N below threshold: 2 | True |
+
+## Reproducibility
+
+Re-run of job `d0d365df16bc` as `880ebb08f0b4`: 80 files compared, 0 hash mismatches, identical results: **True**
+
+## Not covered by this run
+
+- ePSF fitting (Gaussian core approximation used).
+- Independent repetition on a second machine (run `cli reproduce` elsewhere to close Test 7).

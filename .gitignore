@@ -1,0 +1,7 @@
+data/
+site/
+validation/results.json
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/

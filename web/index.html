@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Narvalis — SPHEREx time-domain verifier</title>
+<meta name="description" content="Epoch- and wavelength-aware verification of proper motion and variability in real SPHEREx spectral images.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23060606'/%3E%3Ccircle cx='32' cy='32' r='24' fill='none' stroke='%23f5f4f0' stroke-width='3.4'/%3E%3Ccircle cx='32' cy='32' r='13.5' fill='none' stroke='%23f5f4f0' stroke-width='3.4'/%3E%3Cpath d='M32 18.5a13.5 13.5 0 0 1 0 27' fill='none' stroke='%23ff4d42' stroke-width='3.8' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/doto-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vendor/gridstack/gridstack.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="booting" data-m="sky">
+<div id="splash" class="splash" role="status" aria-label="Loading Narvalis">
+  <svg class="splash-logo" viewBox="0 0 100 100" aria-hidden="true">
+    <g class="s-conv"></g>
+    <g class="s-sweep"><path d="M50 50V2"/></g>
+    <circle class="s-outer" cx="50" cy="50" r="46"/>
+    <circle class="s-inner" cx="50" cy="50" r="29"/>
+    <circle class="s-arc" cx="50" cy="50" r="29"/>
+    <g class="s-orbit"><circle cx="50" cy="50" r="46" fill="none" stroke="none"/><circle class="s-dot" cx="50" cy="4" r="2.6"/></g>
+    <g class="s-orbit2"><circle cx="50" cy="50" r="29" fill="none" stroke="none"/><circle class="s-dot2" cx="50" cy="79" r="1.8"/></g>
+    <circle class="s-core" cx="50" cy="50" r="2"/>
+  </svg>
+  <div class="splash-word">NARVALIS</div>
+  <div class="splash-sub">SPHEREx · TIME-DOMAIN</div>
+</div>
+<div id="intro" class="intro" role="dialog" aria-modal="true" aria-label="About Narvalis" hidden>
+  <header class="in-top">
+    <div class="in-brand"><span class="brand-mark" aria-hidden="true"></span><b class="dot">NARVALIS</b></div>
+    <div class="in-right"><ol id="inDots" class="in-dots" aria-hidden="true"></ol>
+      <button type="button" id="inSkip" class="in-skip">Skip intro</button></div>
+  </header>
+  <main class="in-main">
+    <section class="in-text" aria-live="polite">
+      <span id="inKicker" class="in-kicker"></span>
+      <h2 id="inTitle" class="in-title"></h2>
+      <p id="inBody" class="in-body"></p>
+      <p id="inNote" class="in-note"></p>
+    </section>
+    <figure id="inFig" class="in-fig"></figure>
+  </main>
+  <footer class="in-foot">
+    <span class="in-legal">NASA Space Apps Challenge 2026 · independent student project, not affiliated with or endorsed by NASA, JPL, Caltech, IPAC or ESA</span>
+    <div class="in-nav">
+      <button type="button" id="inPrev" class="round" aria-label="Previous slide"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+      <span id="inPos" class="in-pos"></span>
+      <button type="button" id="inNext" class="in-next"><span id="inCta">Next</span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </footer>
+</div>
+<div class="shell">
+
+<!-- ============ HEADER: brand · search (primary action) · status ============ -->
+<header class="top">
+  <div class="brand" id="brand" role="button" tabindex="0" aria-pressed="false" title="Narvalis · click to fold the logo">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div>
+      <h1 class="dot">NARVALIS</h1>
+      <div class="tag">SPHEREx TIME-DOMAIN</div>
+    </div>
+  </div>
+
+  <div class="ptitle" id="ptitle" aria-live="polite"><h2 id="ptName">—</h2><span id="ptSky" class="label"></span><span id="ptRes" class="label pt-res">Three answers</span></div>
+
+  <form id="form" class="search" autocomplete="off">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v6M12 16v6M2 12h6M16 12h6" stroke="currentColor" stroke-width="1.5" stroke-dasharray="1 2.2"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></svg>
+    <input id="q" type="text" enterkeyhint="search" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Target name or RA Dec in degrees" placeholder="Barnard's Star  ·  or  269.4521 4.6934">
+    <button type="button" id="advBtn" class="round ghost" aria-label="Options" aria-expanded="false"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></button>
+    <button id="run" type="submit" class="send" aria-label="Analyse real SPHEREx data">
+      <svg viewBox="0 0 24 24"><path d="M4 12 20 4l-6 16-2.5-6.5L4 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    </button>
+    <div id="adv" class="adv" hidden>
+      <label title="More exposures: smaller errors on motion and distance, longer download (about 4 MB each)">Max frames<input id="maxFrames" type="number" inputmode="numeric" min="3" max="300" value="150"></label>
+      <label>Cutout ″<input id="size" type="number" inputmode="numeric" min="60" max="600" value="600"></label>
+      <label>Controls<input id="controls" type="number" inputmode="numeric" min="0" max="5" value="2"></label>
+      <label class="tog"><input id="useGaia" type="checkbox" checked><span></span>Gaia DR3</label>
+    </div>
+  </form>
+
+  <div class="top-right">
+    <div class="clockbox" id="clockbox" role="button" tabindex="0" title="Coordinated Universal Time · click: Modified Julian Date">
+      <span class="lbl" id="clockLbl">UTC</span><span id="clock" class="dot clock">--:--</span>
+      <span id="signal" class="signal" role="img" aria-label="Archive status"><i></i><i></i><i></i><i></i></span>
+    </div>
+    <button id="mode" class="mode" type="button" title="Archive status · click to check again">…</button>
+    <button id="connBtn" class="round connbtn" type="button" aria-label="Connections: test the archives" title="Connections"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1.6"/><path d="M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7M5.6 18.4a9 9 0 0 1 0-12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></svg><i class="conndot" aria-hidden="true"></i></button>
+    <span id="provHead" class="prov head none" role="status"><i aria-hidden="true"></i><span>NO DATA</span></span>
+    <button id="focusBtn" class="round" type="button" aria-pressed="false" title="Focus view: the image and the key answers, nothing else (V)"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6"/></svg></button>
+    <div class="lwrap"><button id="layoutBtn" class="round" aria-label="Layout" aria-expanded="false" aria-controls="layoutMenu" title="Layout"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="9" height="9" rx="1.5"/><rect x="15" y="4" width="5" height="5" rx="1.5"/><rect x="15" y="11" width="5" height="9" rx="1.5"/><rect x="4" y="15" width="9" height="5" rx="1.5"/></svg></button>
+    <div id="layoutMenu" class="lmenu" role="dialog" aria-label="Layout options" hidden></div></div>
+    <button id="aboutBtn" class="round" type="button" aria-label="About Narvalis" title="About Narvalis (intro)"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r=".7" fill="currentColor"/></svg></button>
+    <button id="helpBtn" class="round" aria-label="Guided tour"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.6"/><circle cx="12" cy="17.2" r=".6" fill="currentColor"/></svg></button>
+  </div>
+</header>
+
+<main class="layout">
+
+  <!-- ============ LEFT: what to look at ============ -->
+  <aside class="col left" aria-label="Targets and history">
+    <section class="hero" aria-label="Start">
+      <h2 class="hero-h">Did it move?<br>Ask every SPHEREx epoch.</h2>
+      <p class="hero-p">Real NASA/IPAC IRSA exposures · Gaia DR3 track · wavelength-matched brightness</p>
+      <div id="heroSlot" class="hero-slot"></div>
+    </section>
+    <section class="block">
+      <div class="label row">Challenge targets <span id="chipsNote" class="dim pt-only"></span></div>
+      <ul id="chips" class="targets"></ul>
+    </section>
+    <section class="block grow">
+      <div class="label row jobs-head"><span>Your analyses</span><button type="button" id="jobsSelect" class="linkbtn">Select</button></div>
+      <div id="jobsBar" class="jobsbar" hidden>
+        <span id="jobsCount">0 selected</span>
+        <button type="button" id="jobsFailed">Select failed</button>
+        <button type="button" id="jobsDelete" class="jb-del" disabled>Delete</button>
+        <button type="button" id="jobsCancel">Cancel</button>
+      </div>
+      <ul id="jobs" class="jobs"></ul>
+    </section>
+    <section class="block sky">
+      <div class="label sky-head"><span>Sky context <span class="dim nl">· <span id="skySurvey">2MASS 1997–2001 · not SPHEREx data</span></span></span>
+        <button type="button" id="skyFull" class="skyfull" aria-label="Enlarge sky context" aria-pressed="false" title="Enlarge sky context"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div>
+      <div id="aladin" class="aladin"></div>
+      <div id="skyNote" class="skynote"></div>
+      <div id="pinsBox" class="pins" hidden>
+        <div class="label row"><span>Pins <span class="dim">· kept in this browser</span></span><button type="button" id="pinsClear" class="linkbtn">Clear</button></div>
+        <ul id="pinsList" class="pinslist"></ul>
+      </div>
+    </section>
+  </aside>
+
+  <!-- ============ CENTER: the data ============ -->
+  <section class="col center" aria-label="Time-series viewer">
+    <div class="centerbar">
+      <ol id="steps" class="steps" aria-label="Pipeline progress">
+        <li data-k="resolve"><i></i><span>RESOLVE</span></li>
+        <li data-k="irsa"><i></i><span>IRSA</span></li>
+        <li data-k="download"><i></i><span>DOWNLOAD</span></li>
+        <li data-k="measure"><i></i><span>MEASURE</span></li>
+        <li data-k="analysis"><i></i><span>ANALYSIS</span></li>
+      </ol>
+      <div class="seg" role="tablist" aria-label="Image mode">
+        <button data-view="raw" class="on" role="tab"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="2.2"/></svg>EPOCH</button>
+        <button data-view="diff" role="tab" title="Difference against another epoch in the same wavelength bin"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="12" height="12" rx="2"/><rect x="9" y="6" width="12" height="12" rx="2" stroke-dasharray="2 2"/></svg><span class="lg-only">MATCHED-</span><span class="ph-only">SAME-</span><span class="nl">λ</span> DIFF</button>
+      </div>
+    </div>
+
+    <div class="stage-wrap">
+      <div class="stage" id="stage">
+        <span class="br tl"></span><span class="br tr"></span><span class="br bl"></span><span class="br br_"></span>
+        <div class="crumb"><span id="crumb1">SKY / SPHEREx</span><span>N↑ E← · TIME-DOMAIN VIEW</span></div>
+        <div id="zoomport" class="zoomport" title="Scroll or pinch to zoom · drag to pan · double-click to zoom in/out">
+          <div id="zoomer" class="zoomer">
+            <div id="imgbox" class="imgbox"><img id="frame" alt="SPHEREx cutout" hidden></div>
+          </div>
+          <svg id="overlay" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <svg id="scalebar" class="scalebar" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"></svg>
+        </div>
+        <div id="zoomctl" class="zoomctl" role="group" aria-label="Zoom">
+          <button type="button" id="zIn" aria-label="Zoom in"><svg class="i" viewBox="0 0 24 24"><path d="M12 6v12M6 12h12"/></svg></button>
+          <button type="button" id="zLvl" class="zlvl" aria-label="Reset zoom" title="Reset zoom (0)">1×</button>
+          <button type="button" id="zOut" aria-label="Zoom out"><svg class="i" viewBox="0 0 24 24"><path d="M6 12h12"/></svg></button>
+          <button type="button" id="zPin" aria-label="Pin mode: click the image to mark a sky position" aria-pressed="false" title="Pin a sky position (P)"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-6-5.6-6-10.5a6 6 0 0 1 12 0C18 15.4 12 21 12 21Z"/><circle cx="12" cy="10.5" r="2.2"/></svg><b id="pinCount" class="pincount" hidden></b></button>
+          <button type="button" id="zFull" aria-label="Full screen" title="Full screen (F)"><svg class="i" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        </div>
+        <div class="reticle" aria-hidden="true"></div>
+        <span class="compass" aria-hidden="true">N↑ E←</span>
+        <div id="pinLabels" class="pinlabels" aria-hidden="true"></div>
+        <div id="cursorRd" class="cursorrd" role="status" hidden></div>
+        <div id="fcBadge" class="fcbadge" hidden>FALSE COLOUR · <span class="nl">λ</span></div>
+        <div id="empty" class="empty">
+          <div class="dot big">READY</div>
+          <p>Choose a target or enter coordinates above.<br>Every frame is a real SPHEREx exposure from IRSA.</p>
+        </div>
+        <div class="coord"><span id="coordTxt">RA —&nbsp;&nbsp;DEC —</span></div>
+        <div id="prov" class="prov none" role="status" title="No analysis loaded"><i aria-hidden="true"></i><span>NO DATA</span></div>
+        <div id="stamp" class="stamp"></div>
+      </div>
+      <div id="loader" class="loader" hidden aria-live="polite">
+        <canvas id="warp" class="warp" aria-hidden="true"></canvas>
+        <div id="dots" class="dots" aria-hidden="true"></div>
+        <svg class="ring" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="44" class="ring-bg"/>
+          <circle cx="50" cy="50" r="44" class="ring-fg" id="ringFg"/>
+          <circle cx="50" cy="50" r="36" class="ring-spin"/>
+        </svg>
+        <div class="loader-text">
+          <div class="lhead"><span class="ltitle">Analysing SPHEREx observations</span><span id="lTarget" class="ltarget"></span></div>
+          <div class="lrow"><div class="lbar" aria-hidden="true"><i id="lbarFill"></i></div><div id="pct" class="pct">0%</div></div>
+          <div id="lmsg" class="lmsg">Starting</div>
+          <ol id="lsteps" class="lsteps" aria-hidden="true"><li><i></i><span>Resolve target</span></li><li><i></i><span>Query archive</span></li><li><i></i><span>Download exposures</span></li><li><i></i><span>Measure</span></li><li><i></i><span>Analyse</span></li></ol>
+          <div class="lfoot"><span>Source: NASA/IPAC Infrared Science Archive (IRSA)</span><span>Elapsed <span id="lel">00:00</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dock">
+      <div class="dock-row">
+        <div class="transport">
+          <button id="prev" class="round" aria-label="Previous frame"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14"/><path d="M18 6 9 12l9 6z"/></svg></button>
+          <button id="play" class="round play" aria-label="Play"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path class="ic-play" d="M8 5.5v13l11-6.5z"/><g class="ic-pause"><path d="M8.5 5.5v13"/><path d="M15.5 5.5v13"/></g></svg></button>
+          <button id="next" class="round" aria-label="Next frame"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14"/><path d="M6 6l9 6-9 6z"/></svg></button>
+          <label class="speed"><input id="fps" type="range" min="1" max="12" value="4" aria-label="Playback speed"><output id="fpsVal" class="dot">4</output><span class="dim">fps</span></label>
+        </div>
+        <div class="toggles controls">
+          <label class="tog"><input id="lockBin" type="checkbox"><span></span>same <i class="nl">λ</i></label>
+          <label class="tog"><input id="showTrack" type="checkbox" checked><span></span>track</label>
+          <label class="tog" title="Off = true data (single near-infrared band, shown as measured brightness). On = false colour keyed to wavelength."><input id="tintOn" type="checkbox"><span></span>false colour</label>
+        </div>
+      </div>
+      <div class="timeline" id="timeline" aria-label="Timeline: one tick per exposure, colour = wavelength"></div>
+      <div class="film-wrap">
+        <div class="film-head"><span class="label">Exposures · <span class="lg-only">click, ← → or swipe</span><span class="ph-only">tap or swipe</span></span><span id="filmCount" class="label"></span></div>
+        <div id="film" class="film" role="listbox" aria-label="Exposures in time order; colour bar = wavelength"></div>
+      </div>
+      <div class="dock-row legends">
+        <div class="spectrum" aria-label="Wavelength colour scale">
+          <span><i class="nl">λ</i> 0.75</span><b id="specbar"><em id="specmark"></em></b><span>5.0 µm</span>
+        </div>
+        <div class="cbar" aria-label="Intensity scale of the displayed frame">
+          <span id="cbLo">—</span><b id="cbGrad"></b><span id="cbHi">—</span><span id="cbUnit" class="dim">MJy/sr</span>
+          <span class="nodata" title="No data or flagged pixel"><i></i></span>
+        </div>
+      </div>
+      <div id="cbScope" class="scope dim"></div>
+    </div>
+    <button type="button" id="dispBtn" class="dispbtn" aria-expanded="false">Display options</button>
+    <div id="storyMini" class="story-mini" hidden></div>
+  </section>
+
+  <!-- ============ RIGHT: the evidence ============ -->
+  <aside class="col right" aria-label="Evidence">
+    <section id="story" class="story" aria-label="Summary of the analysis" hidden></section>
+    <div class="card">
+      <div class="target">
+        <div class="thumb" id="thumbbox"><img id="thumb" alt="" hidden></div>
+        <div class="tmeta">
+          <h2 id="tname" class="dot tname">—</h2>
+          <div id="tsub" class="label">SPHEREx</div>
+          <div id="provCard" class="prov inline none"><i aria-hidden="true"></i><span>No data loaded</span></div>
+          <div class="stats">
+            <div><div class="label">RA</div><div id="sRa" class="val">—</div></div>
+            <div><div class="label">DEC</div><div id="sDec" class="val">—</div></div>
+            <div><div class="label" title="1 / Gaia parallax">DIST</div><div id="sDist" class="val">—</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sect seq">
+        <div class="label row">Time sequence <span id="seqCount" class="dim"></span></div>
+        <div id="strip" class="strip"></div>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Evidence">
+        <button role="tab" data-tab="motion" data-ic="1" class="on"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18c4-1 6-9 9-10s5 2 7-2"/><circle cx="4" cy="18" r="1.4"/><circle cx="20" cy="6" r="1.4"/></svg>MOTION</button>
+        <button role="tab" data-tab="bright" data-ic="1"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15l4-5 4 3 4-7 6 9"/></svg>BRIGHTNESS</button>
+        <button role="tab" data-tab="sed" data-ic="1"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19c3 0 4-12 7-12s3 7 5 7 3-4 6-4"/></svg>SPECTRUM</button>
+        <button role="tab" data-tab="checks" data-ic="1"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4 4 10-10"/></svg>CHECKS <span id="checkBadge" class="badge"></span></button>
+        <button role="tab" data-tab="frame" data-ic="1"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>FRAME</button>
+      </div>
+      <div class="panels">
+        <section class="panel on" data-panel="motion">
+          <dl id="kvMotion" class="kv"></dl>
+          <div class="label">Residuals from catalogue track <span class="dim nl">arcsec</span></div>
+          <svg id="resid" class="chart" viewBox="0 0 400 130"></svg>
+        </section>
+        <section class="panel" data-panel="bright">
+          <dl id="kvBright" class="kv"></dl>
+          <div class="label">Light curve · one line per <span class="nl">λ</span> band <span class="dim nl">µJy</span></div>
+          <svg id="lc" class="chart" viewBox="0 0 400 150"></svg>
+        </section>
+        <section class="panel" data-panel="sed">
+          <dl id="kvSed" class="kv"></dl>
+          <div class="label">Approximate SED from the time series <span class="dim nl">µJy vs µm</span></div>
+          <svg id="sedChart" class="chart" viewBox="0 0 400 170"></svg>
+          <div class="sedlegend"><span>colour = date</span><b></b><span id="sedT0">first</span>→<span id="sedT1">last</span></div>
+          <p id="sedNote" class="caveats nl"></p>
+        </section>
+        <section class="panel" data-panel="checks">
+          <ul id="verdicts" class="verdicts"></ul>
+          <div id="kind" class="kind"></div>
+          <details><summary class="label">Caveats</summary><ul id="caveats" class="caveats"></ul></details>
+        </section>
+        <section class="panel" data-panel="frame">
+          <dl id="meta" class="meta"></dl>
+        </section>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a id="dlDossier" class="act" download aria-disabled="true">
+        <svg viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span>DOSSIER <small>JSON</small></span></a>
+      <button id="dlCsv" class="act" aria-disabled="true">
+        <svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M4 19h16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>EPOCHS <small>CSV</small></span></button>
+      <a id="dlBundle" class="act" aria-disabled="true">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>BUNDLE <small>ZIP</small></span></a>
+    </div>
+  </aside>
+</main>
+
+<nav class="mnav" aria-label="Sections">
+  <button data-m="targets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5" stroke-linecap="round"/></svg>EXPLORE</button>
+  <button data-m="sky" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8.5" stroke-dasharray="1.5 2.5"/><path d="M12 3v5M12 16v5M3 12h5M16 12h5"/></svg>SKY</button>
+  <button data-m="results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19h16M7 16V9M12 16V5M17 16v-4"/></svg>RESULTS<span id="mBadge" class="count" hidden></span></button>
+</nav>
+<footer class="foot">
+  Data: SPHEREx spectral images via NASA/IPAC IRSA · astrometry: ESA Gaia DR3 · names: CDS SIMBAD/Sesame ·
+  independent student project, not affiliated with or endorsed by NASA, JPL, Caltech, IPAC or ESA ·
+  fonts: Doto, Space Grotesk, Space Mono (SIL OFL 1.1)
+</footer>
+</div>
+
+<script src="tour.js"></script>
+<script src="vendor/gridstack/gridstack-all.js"></script>
+<script src="cockpit.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

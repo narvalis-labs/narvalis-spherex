@@ -1,0 +1,1158 @@
+{
+ "started_utc": "2026-11-14T21:39:27Z",
+ "collections": [
+  "auto"
+ ],
+ "targets": [
+  {
+   "name": "Barnard's Star",
+   "purpose": "high proper motion",
+   "primary_check": "proper_motion_vs_catalogue",
+   "job_id": "d0d365df16bc",
+   "n_found": 358,
+   "n_selected": 80,
+   "reference": {
+    "ra_deg": 269.44850252543836,
+    "dec_deg": 4.739420051112412,
+    "epoch_jyear": 2016.0,
+    "pmra_masyr": -801.5509783684709,
+    "pmdec_masyr": 10362.394206546573,
+    "parallax_mas": 546.975939730948,
+    "rv_kms": -110.46822357177734,
+    "source": "Gaia DR3 4472832130942575872",
+    "pmra_err": 0.0318208672106266,
+    "pmdec_err": 0.036070454865694046,
+    "pm_known": true
+   },
+   "verdicts": [
+    {
+     "check": "data_provenance",
+     "result": "PASS",
+     "rule": "every measured frame has archive URL + SHA-256",
+     "detail": "80 frames measured"
+    },
+    {
+     "check": "detection",
+     "result": "PASS",
+     "rule": "centroid S/N >= threshold, at the predicted position, in >= 3 epochs",
+     "detail": "50/80 epochs at \u03bb 0.77\u20135.00 \u00b5m"
+    },
+    {
+     "check": "astrometric_calibration",
+     "result": "PASS",
+     "rule": "per-exposure offsets from >= 3 Gaia field stars in >= 3 exposures",
+     "detail": "80/80 exposures, median 21 stars, floor 0.22\u2033"
+    },
+    {
+     "check": "motion_detected",
+     "result": "YES",
+     "rule": "static-position model rejected at p < 1e-3",
+     "detail": "p = 0.00e+00, span 1.10 yr"
+    },
+    {
+     "check": "proper_motion_vs_catalogue",
+     "result": "CONSISTENT",
+     "rule": "|measured - catalogue| < 3 sigma in both axes",
+     "detail": "z = (+0.20, -0.54)"
+    },
+    {
+     "check": "variability_matched_wavelength",
+     "result": "POSSIBLE (saturated core)",
+     "rule": "constant flux rejected at p < 1e-3 within same-wavelength bins (errors incl. field-star floor); VARIABLE if max/min >= 1.2 and the rejection is seen in >= 2 bins with aperture photometry; otherwise POSSIBLE (low amplitude / one bin / saturated core)",
+     "detail": "chi2/dof = 65.4/19, p = 5.17e-07, max/min 3.59, floor 0.9%; signal only in PSF-wing fluxes of a saturated core"
+    },
+    {
+     "check": "photocentre_shift",
+     "result": "NO EVIDENCE",
+     "rule": "position residual vs brightness or wavelength, Pearson p < 1e-3 (4 tests, Bonferroni)",
+     "detail": "strongest: RA* vs brightness, r = +0.11, p = 1.0e+00"
+    },
+    {
+     "check": "field_star_controls",
+     "result": "PASS",
+     "rule": "Gaia field stars through the same pipeline: <=10% with |z|>3 and z spread < 2",
+     "detail": "51 stars, 0% |z|>3, z std 0.71"
+    }
+   ],
+   "motion": {
+    "ok": true,
+    "reason": "ok",
+    "n_epochs": 50,
+    "time_span_yr": 1.1027058343599947,
+    "pmra_masyr": -764.7802464969277,
+    "pmdec_masyr": 10264.535412156978,
+    "pmra_err": 182.73632774528818,
+    "pmdec_err": 182.77790509622184,
+    "reduced_chi2_linear": 3.192230617254435,
+    "chi2_vs_reference": 307.7672558505613,
+    "dof_vs_reference": 98,
+    "p_value_vs_reference": 1.663693822063381e-23,
+    "z_pmra": 0.20122288637262592,
+    "z_pmdec": -0.5353972759043505,
+    "error_scale": 1.7866814537724498,
+    "chi2_static": 10429.956437252675,
+    "p_value_static": 0.0,
+    "calibrated": true
+   },
+   "variability_combined": {
+    "combined_chi2": 65.4448557234128,
+    "combined_dof": 19,
+    "combined_p_value": 5.168566669337347e-07
+   },
+   "controls": {
+    "n_stars": 51,
+    "frac_abs_z_gt_3": 0.0,
+    "z_std": 0.7103713412553316,
+    "z_median_abs": 0.3742829720211752
+   },
+   "calibration": {
+    "enabled": true,
+    "n_reference_stars": 120,
+    "frames_calibrated": 80,
+    "frames_usable": 80,
+    "median_stars_per_frame": 21.0,
+    "astrometric_floor_arcsec": 0.2203293637727518,
+    "photometric_floor_frac": 0.009460109340984957,
+    "gaia_gmax": 18.5,
+    "uncalibrated_exposure_extra_sigma_arcsec": [
+     0.0791019137792307,
+     0.12947331625104913
+    ]
+   },
+   "frame_status": {
+    "ok": 80
+   },
+   "centroid_failures": {
+    "S/N": 30
+   },
+   "detected_wavelengths_um": [
+    0.7672365771104012,
+    0.8428504768762317,
+    0.8523882163647358,
+    0.9257887787994761,
+    0.9584021664249219,
+    0.9704688233811901,
+    1.016520683897408,
+    1.1135075023085255,
+    1.3605487674366117,
+    1.7274048053758109,
+    1.7880421057836375,
+    1.7932157969754736,
+    1.8728287468745264,
+    1.8941027849839045,
+    1.9665412597793495,
+    1.9828849652971225,
+    2.05209508911262,
+    2.0582278019906433,
+    2.0755283443797112,
+    2.2238611565212443,
+    2.273957085361705,
+    2.379077473436884,
+    3.4042284883516927,
+    3.8434576071099142,
+    3.887917598885192,
+    3.9040905759002893,
+    3.910021680864114,
+    3.9406746897702867,
+    4.009825103855658,
+    4.025047725310142,
+    4.148597869441246,
+    4.187282017658678,
+    4.223126118395512,
+    4.290804454292095,
+    4.295873788881139,
+    4.296127970252348,
+    4.355487724996979,
+    4.363952855281673,
+    4.43396015602635,
+    4.443507233235299,
+    4.449930182824054,
+    4.507515097583745,
+    4.584797091781374,
+    4.836049635393569,
+    4.853673779958619,
+    4.858096549986153,
+    4.9287067652026595,
+    4.929961534574161,
+    4.96601947837122,
+    5.00075831107338
+   ]
+  },
+  {
+   "name": "eps Ind B",
+   "purpose": "nearby brown dwarf, proper motion",
+   "primary_check": "proper_motion_vs_catalogue",
+   "job_id": "452fdea58f1b",
+   "n_found": 458,
+   "n_selected": 80,
+   "reference": {
+    "ra_deg": 331.07645259656397,
+    "dec_deg": -56.79381206688221,
+    "epoch_jyear": 2016.0,
+    "pmra_masyr": 3981.97666296105,
+    "pmdec_masyr": -2466.8318147663504,
+    "parallax_mas": 270.6580324694526,
+    "rv_kms": null,
+    "source": "Gaia DR3 6412596012146801152",
+    "pmra_err": 0.6016567945480347,
+    "pmdec_err": 0.6256827116012573,
+    "pm_known": true
+   },
+   "verdicts": [
+    {
+     "check": "data_provenance",
+     "result": "PASS",
+     "rule": "every measured frame has archive URL + SHA-256",
+     "detail": "80 frames measured"
+    },
+    {
+     "check": "detection",
+     "result": "PASS",
+     "rule": "centroid S/N >= threshold, at the predicted position, in >= 3 epochs",
+     "detail": "76/80 epochs at \u03bb 0.89\u20135.00 \u00b5m"
+    },
+    {
+     "check": "astrometric_calibration",
+     "result": "PASS",
+     "rule": "per-exposure offsets from >= 3 Gaia field stars in >= 3 exposures",
+     "detail": "59/80 exposures, median 9 stars, floor 0.29\u2033"
+    },
+    {
+     "check": "motion_detected",
+     "result": "YES",
+     "rule": "static-position model rejected at p < 1e-3",
+     "detail": "p = 0.00e+00, span 1.44 yr"
+    },
+    {
+     "check": "proper_motion_vs_catalogue",
+     "result": "CONSISTENT",
+     "rule": "|measured - catalogue| < 3 sigma in both axes",
+     "detail": "z = (-1.06, -0.33)"
+    },
+    {
+     "check": "variability_matched_wavelength",
+     "result": "POSSIBLE (one \u03bb bin)",
+     "rule": "constant flux rejected at p < 1e-3 within same-wavelength bins (errors incl. field-star floor); VARIABLE if max/min >= 1.2 and the rejection is seen in >= 2 bins with aperture photometry; otherwise POSSIBLE (low amplitude / one bin / saturated core)",
+     "detail": "chi2/dof = 49.4/19, p = 1.60e-04, max/min 1.20, floor 2.6%; driven by one bin (1.78\u20131.80 \u00b5m, n=3)"
+    },
+    {
+     "check": "photocentre_shift",
+     "result": "NO EVIDENCE",
+     "rule": "position residual vs brightness or wavelength, Pearson p < 1e-3 (4 tests, Bonferroni)",
+     "detail": "strongest: RA* vs wavelength, r = +0.30, p = 3.2e-02"
+    },
+    {
+     "check": "field_star_controls",
+     "result": "PASS",
+     "rule": "Gaia field stars through the same pipeline: <=10% with |z|>3 and z spread < 2",
+     "detail": "26 stars, 0% |z|>3, z std 0.91"
+    }
+   ],
+   "motion": {
+    "ok": true,
+    "reason": "ok",
+    "n_epochs": 76,
+    "time_span_yr": 1.4390761232034492,
+    "pmra_masyr": 3910.824431280952,
+    "pmdec_masyr": -2489.2356199340275,
+    "pmra_err": 67.0164074314653,
+    "pmdec_err": 68.39703080574192,
+    "reduced_chi2_linear": 0.4955803629783228,
+    "chi2_vs_reference": 74.61539580112431,
+    "dof_vs_reference": 150,
+    "p_value_vs_reference": 0.9999999623247119,
+    "z_pmra": -1.0616708227624636,
+    "z_pmdec": -0.32754152572383616,
+    "error_scale": 1.0,
+    "chi2_static": 4803.311618683158,
+    "p_value_static": 0.0,
+    "calibrated": true
+   },
+   "variability_combined": {
+    "combined_chi2": 49.40592980624823,
+    "combined_dof": 19,
+    "combined_p_value": 0.0001602016373019075
+   },
+   "controls": {
+    "n_stars": 26,
+    "frac_abs_z_gt_3": 0.0,
+    "z_std": 0.9086813087103833,
+    "z_median_abs": 0.552577201634344
+   },
+   "calibration": {
+    "enabled": true,
+    "n_reference_stars": 47,
+    "frames_calibrated": 59,
+    "frames_usable": 80,
+    "median_stars_per_frame": 9.0,
+    "astrometric_floor_arcsec": 0.28670789910528016,
+    "photometric_floor_frac": 0.025558196090559093,
+    "gaia_gmax": 18.5,
+    "uncalibrated_exposure_extra_sigma_arcsec": [
+     0.12079940549290383,
+     0.153919817460308
+    ]
+   },
+   "frame_status": {
+    "ok": 80
+   },
+   "centroid_failures": {
+    "S/N": 3,
+    "centroid": 1
+   },
+   "detected_wavelengths_um": [
+    0.8903108230836211,
+    0.8934132880864611,
+    1.0250208094516984,
+    1.0663762350539718,
+    1.1070451560250203,
+    1.132719851477835,
+    1.1750000607854547,
+    1.1876514578459563,
+    1.2159702047785617,
+    1.2170009005150328,
+    1.2170861553109393,
+    1.2318475090970908,
+    1.2460159880008905,
+    1.2749016339677939,
+    1.3049779668314043,
+    1.3533971726802079,
+    1.5053060186251792,
+    1.524019405878039,
+    1.5405851175935825,
+    1.5616679206750859,
+    1.5794325431619174,
+    1.6132603073712029,
+    1.637264328657438,
+    1.6378909702953943,
+    1.694348996402555,
+    1.714440418775916,
+    1.7238684975338006,
+    1.780053758314019,
+    1.8049070541280923,
+    1.8049588291183032,
+    1.8473220948958577,
+    1.8645886918365118,
+    1.9340340752412377,
+    1.9344622862920746,
+    1.9970674284074192,
+    2.024059652174448,
+    2.071450930524938,
+    2.112503409145476,
+    2.269417063987463,
+    2.6716750541405117,
+    2.7437192866783393,
+    2.818355947743903,
+    3.212270676004271,
+    3.2278473536856636,
+    3.5912514560062396,
+    3.7406307177121016,
+    3.8641938722342952,
+    3.8966071878848334,
+    3.9306540211984133,
+    4.068163415023748,
+    4.174892894245261,
+    4.231051313965289,
+    4.248487407586524,
+    4.28369862511011,
+    4.321970042599091,
+    4.358562607058579,
+    4.37758678134607,
+    4.389769022078469,
+    4.407584216372926,
+    4.454985350652077,
+    4.462546077292883,
+    4.462573434519677,
+    4.462633809973351,
+    4.495048288380515,
+    4.524402778647525,
+    4.660875087897173,
+    4.690418022134745,
+    4.694687338068383,
+    4.798359911043043,
+    4.812118281162537,
+    4.846545398562088,
+    4.8968763244160645,
+    4.9038266366715835,
+    4.975469101999389,
+    4.989788672559369,
+    5.004633733756204
+   ]
+  },
+  {
+   "name": "WISE J085510.83-071442.5",
+   "purpose": "coldest known brown dwarf; if detected, expected only at >=3.8 um (hypothesis, docs/REFERENCES.md)",
+   "primary_check": "detection",
+   "job_id": "293db9dc252b",
+   "n_found": 258,
+   "n_selected": 80,
+   "reference": {
+    "ra_deg": 133.81890825,
+    "dec_deg": -7.247048,
+    "epoch_jyear": 2000.0,
+    "pmra_masyr": -8123.7,
+    "pmdec_masyr": 673.2,
+    "parallax_mas": 439.0,
+    "rv_kms": null,
+    "source": "Sesame/S=Simbad, IDIA (via url) WISEA J085510.74-071442.5",
+    "pmra_err": null,
+    "pmdec_err": null,
+    "pm_known": true
+   },
+   "verdicts": [
+    {
+     "check": "data_provenance",
+     "result": "PASS",
+     "rule": "every measured frame has archive URL + SHA-256",
+     "detail": "80 frames measured"
+    },
+    {
+     "check": "detection",
+     "result": "PASS",
+     "rule": "centroid S/N >= threshold, at the predicted position, in >= 3 epochs",
+     "detail": "4/80 epochs at \u03bb 4.22\u20134.55 \u00b5m"
+    },
+    {
+     "check": "astrometric_calibration",
+     "result": "PASS",
+     "rule": "per-exposure offsets from >= 3 Gaia field stars in >= 3 exposures",
+     "detail": "64/80 exposures, median 12 stars, floor 0.34\u2033"
+    },
+    {
+     "check": "motion_detected",
+     "result": "YES",
+     "rule": "static-position model rejected at p < 1e-3",
+     "detail": "p = 2.22e-07, span 1.02 yr"
+    },
+    {
+     "check": "proper_motion_vs_catalogue",
+     "result": "CONSISTENT",
+     "rule": "|measured - catalogue| < 3 sigma in both axes",
+     "detail": "z = (+0.84, +0.63)"
+    },
+    {
+     "check": "variability_matched_wavelength",
+     "result": "NO EVIDENCE",
+     "rule": "constant flux rejected at p < 1e-3 within same-wavelength bins (errors incl. field-star floor); VARIABLE if max/min >= 1.2 and the rejection is seen in >= 2 bins with aperture photometry; otherwise POSSIBLE (low amplitude / one bin / saturated core)",
+     "detail": "chi2/dof = 10.6/12, p = 5.67e-01, max/min 1.00, floor 0.7%"
+    },
+    {
+     "check": "field_star_controls",
+     "result": "PASS",
+     "rule": "Gaia field stars through the same pipeline: <=10% with |z|>3 and z spread < 2",
+     "detail": "37 stars, 0% |z|>3, z std 0.68"
+    }
+   ],
+   "motion": {
+    "ok": true,
+    "reason": "ok",
+    "n_epochs": 4,
+    "time_span_yr": 1.0159307529088437,
+    "pmra_masyr": -7131.311316942139,
+    "pmdec_masyr": 1396.8157483062762,
+    "pmra_err": 1174.8049792877382,
+    "pmdec_err": 1148.6942507525614,
+    "reduced_chi2_linear": 0.8152612268745594,
+    "chi2_vs_reference": 4.3701354505324295,
+    "dof_vs_reference": 6,
+    "p_value_vs_reference": 0.6267204016878063,
+    "z_pmra": 0.8447263167538901,
+    "z_pmdec": 0.6299463480662525,
+    "error_scale": 1.0,
+    "chi2_static": 41.58714114150933,
+    "p_value_static": 2.2182334252487073e-07,
+    "calibrated": true
+   },
+   "variability_combined": {
+    "combined_chi2": 10.556139884067923,
+    "combined_dof": 12,
+    "combined_p_value": 0.5672905534326864
+   },
+   "controls": {
+    "n_stars": 37,
+    "frac_abs_z_gt_3": 0.0,
+    "z_std": 0.6777153148722261,
+    "z_median_abs": 0.40139037650158776
+   },
+   "calibration": {
+    "enabled": true,
+    "n_reference_stars": 59,
+    "frames_calibrated": 64,
+    "frames_usable": 80,
+    "median_stars_per_frame": 12.5,
+    "astrometric_floor_arcsec": 0.3358630429424477,
+    "photometric_floor_frac": 0.0072786477039610276,
+    "gaia_gmax": 18.5,
+    "uncalibrated_exposure_extra_sigma_arcsec": [
+     0.19453011278419785,
+     0.1345192195248491
+    ]
+   },
+   "frame_status": {
+    "ok": 80
+   },
+   "centroid_failures": {
+    "detection": 17,
+    "S/N": 59
+   },
+   "detected_wavelengths_um": [
+    4.222092229068971,
+    4.258348164087814,
+    4.295093561931417,
+    4.550972069342685
+   ]
+  },
+  {
+   "name": "RW Aur",
+   "purpose": "young variable star",
+   "primary_check": "variability_matched_wavelength",
+   "job_id": "6a207595ac4b",
+   "n_found": 335,
+   "n_selected": 80,
+   "reference": {
+    "ra_deg": 76.9565443110343,
+    "dec_deg": 30.401316149887936,
+    "epoch_jyear": 2016.0,
+    "pmra_masyr": 4.90603392110511,
+    "pmdec_masyr": -24.577534567492915,
+    "parallax_mas": 5.454096456582266,
+    "rv_kms": null,
+    "source": "Gaia DR3 156430817820015232",
+    "pmra_err": 0.32915833592414856,
+    "pmdec_err": 0.2546490728855133,
+    "pm_known": true
+   },
+   "verdicts": [
+    {
+     "check": "data_provenance",
+     "result": "PASS",
+     "rule": "every measured frame has archive URL + SHA-256",
+     "detail": "80 frames measured"
+    },
+    {
+     "check": "detection",
+     "result": "PASS",
+     "rule": "centroid S/N >= threshold, at the predicted position, in >= 3 epochs",
+     "detail": "75/80 epochs at \u03bb 0.76\u20134.98 \u00b5m"
+    },
+    {
+     "check": "astrometric_calibration",
+     "result": "PASS",
+     "rule": "per-exposure offsets from >= 3 Gaia field stars in >= 3 exposures",
+     "detail": "80/80 exposures, median 22 stars, floor 0.24\u2033"
+    },
+    {
+     "check": "motion_detected",
+     "result": "YES",
+     "rule": "static-position model rejected at p < 1e-3",
+     "detail": "p = 1.81e-19, span 1.04 yr"
+    },
+    {
+     "check": "proper_motion_vs_catalogue",
+     "result": "CONSISTENT",
+     "rule": "|measured - catalogue| < 3 sigma in both axes",
+     "detail": "z = (+2.68, +0.56)"
+    },
+    {
+     "check": "variability_matched_wavelength",
+     "result": "VARIABLE",
+     "rule": "constant flux rejected at p < 1e-3 within same-wavelength bins (errors incl. field-star floor); VARIABLE if max/min >= 1.2 and the rejection is seen in >= 2 bins with aperture photometry; otherwise POSSIBLE (low amplitude / one bin / saturated core)",
+     "detail": "chi2/dof = 1045.4/18, p = 1.38e-210, max/min 3.84, floor 2.0%"
+    },
+    {
+     "check": "photocentre_shift",
+     "result": "DETECTED",
+     "rule": "position residual vs brightness or wavelength, Pearson p < 1e-3 (4 tests, Bonferroni)",
+     "detail": "strongest: RA* vs wavelength, r = +0.67, p = 1.5e-10"
+    },
+    {
+     "check": "field_star_controls",
+     "result": "PASS",
+     "rule": "Gaia field stars through the same pipeline: <=10% with |z|>3 and z spread < 2",
+     "detail": "53 stars, 0% |z|>3, z std 0.69"
+    }
+   ],
+   "motion": {
+    "ok": true,
+    "reason": "ok",
+    "n_epochs": 75,
+    "time_span_yr": 1.0416872005475852,
+    "pmra_masyr": 321.8271241223141,
+    "pmdec_masyr": 41.15437078590732,
+    "pmra_err": 118.16838277630475,
+    "pmdec_err": 118.29841340211028,
+    "reduced_chi2_linear": 2.333480493936904,
+    "chi2_vs_reference": 358.19291498190677,
+    "dof_vs_reference": 148,
+    "p_value_vs_reference": 1.8581960666763435e-19,
+    "z_pmra": 2.6819344841929698,
+    "z_pmdec": 0.5556435726663511,
+    "error_scale": 1.527573400507126,
+    "chi2_static": 358.2785606721891,
+    "p_value_static": 1.8113571377272792e-19,
+    "calibrated": true
+   },
+   "variability_combined": {
+    "combined_chi2": 1045.4094451096546,
+    "combined_dof": 18,
+    "combined_p_value": 1.3786035904005853e-210
+   },
+   "controls": {
+    "n_stars": 53,
+    "frac_abs_z_gt_3": 0.0,
+    "z_std": 0.6873532387056026,
+    "z_median_abs": 0.4952779882458631
+   },
+   "calibration": {
+    "enabled": true,
+    "n_reference_stars": 120,
+    "frames_calibrated": 80,
+    "frames_usable": 80,
+    "median_stars_per_frame": 21.5,
+    "astrometric_floor_arcsec": 0.24195017187136722,
+    "photometric_floor_frac": 0.020013178559347367,
+    "gaia_gmax": 18.5,
+    "uncalibrated_exposure_extra_sigma_arcsec": [
+     0.10622167627499937,
+     0.15499968660609123
+    ]
+   },
+   "frame_status": {
+    "ok": 80
+   },
+   "centroid_failures": {
+    "S/N": 2,
+    "predicted": 2,
+    "too": 1
+   },
+   "detected_wavelengths_um": [
+    0.764469515012952,
+    0.7711921824621741,
+    0.8080364284178791,
+    0.8519167294074954,
+    0.8787877227267443,
+    0.9210185779058588,
+    0.9211342227777773,
+    0.942879083445031,
+    0.94308467455323,
+    0.9883475171325895,
+    1.0683401666946497,
+    1.1054412252811807,
+    1.1194817501968486,
+    1.1216696983851244,
+    1.1461737252991493,
+    1.1752262951307664,
+    1.2017171211343236,
+    1.2691517670989458,
+    1.3523016236879746,
+    1.3935909459529257,
+    1.4170153772893601,
+    1.4302913276278924,
+    1.441139056676049,
+    1.4619101735910365,
+    1.511621255345964,
+    1.5335180734850984,
+    1.5852709010867687,
+    1.6077932553223209,
+    1.7548067164478347,
+    1.7758556821731262,
+    1.8369441720080992,
+    1.885421881221749,
+    1.922744641793876,
+    1.9468858814684742,
+    2.0731367496306805,
+    2.162082048962053,
+    2.1991362328677355,
+    2.2285999692519325,
+    2.2706569657151188,
+    2.322798905764941,
+    2.332312099863019,
+    2.4057402815030824,
+    2.531024292598167,
+    2.6241596553409545,
+    2.670233144455021,
+    2.7680946592769016,
+    2.797702838662208,
+    2.9207301434582744,
+    3.032868312077978,
+    3.2023993616614064,
+    3.4069288015911408,
+    3.525452385840037,
+    3.5924410952821066,
+    3.718384867063098,
+    3.7890833732315867,
+    3.8935273201605245,
+    3.961068219402357,
+    3.9823338846590977,
+    4.030284895721906,
+    4.0514089450753445,
+    4.0966277991664395,
+    4.100291187388835,
+    4.2398162938288335,
+    4.422362068815406,
+    4.455735623806414,
+    4.459602758777823,
+    4.472327914532575,
+    4.603571233480187,
+    4.690681084339587,
+    4.696687796038676,
+    4.75934254600132,
+    4.807829595044215,
+    4.833140063335308,
+    4.924878872810269,
+    4.981335189710102
+   ]
+  },
+  {
+   "name": "R Dra",
+   "purpose": "Mira variable",
+   "primary_check": "variability_matched_wavelength",
+   "job_id": "6abfe14f0861",
+   "n_found": 2493,
+   "n_selected": 80,
+   "reference": {
+    "ra_deg": 248.1673783672889,
+    "dec_deg": 66.75500674547219,
+    "epoch_jyear": 2016.0,
+    "pmra_masyr": -20.642811719160797,
+    "pmdec_masyr": 6.148818852711324,
+    "parallax_mas": 1.2509180143740992,
+    "rv_kms": null,
+    "source": "Gaia DR3 1648328016354496384",
+    "pmra_err": 0.0851282924413681,
+    "pmdec_err": 0.09132147580385208,
+    "pm_known": true
+   },
+   "verdicts": [
+    {
+     "check": "data_provenance",
+     "result": "PASS",
+     "rule": "every measured frame has archive URL + SHA-256",
+     "detail": "80 frames measured"
+    },
+    {
+     "check": "detection",
+     "result": "PASS",
+     "rule": "centroid S/N >= threshold, at the predicted position, in >= 3 epochs",
+     "detail": "6/80 epochs at \u03bb 0.75\u20134.48 \u00b5m"
+    },
+    {
+     "check": "astrometric_calibration",
+     "result": "PASS",
+     "rule": "per-exposure offsets from >= 3 Gaia field stars in >= 3 exposures",
+     "detail": "38/80 exposures, median 4 stars, floor 0.58\u2033"
+    },
+    {
+     "check": "motion_detected",
+     "result": "NO EVIDENCE",
+     "rule": "static-position model rejected at p < 1e-3",
+     "detail": "p = 8.81e-01, span 0.81 yr"
+    },
+    {
+     "check": "proper_motion_vs_catalogue",
+     "result": "CONSISTENT",
+     "rule": "|measured - catalogue| < 3 sigma in both axes",
+     "detail": "z = (+0.32, +0.88)"
+    },
+    {
+     "check": "variability_matched_wavelength",
+     "result": "INCONCLUSIVE",
+     "rule": "needs >= 3 repeat measurements in common wavelength bins",
+     "detail": "only 1 (chi2/dof = 3.7/1); a bright target may be saturated in most exposures"
+    },
+    {
+     "check": "field_star_controls",
+     "result": "PASS",
+     "rule": "Gaia field stars through the same pipeline: <=10% with |z|>3 and z spread < 2",
+     "detail": "16 stars, 0% |z|>3, z std 0.57"
+    }
+   ],
+   "motion": {
+    "ok": true,
+    "reason": "ok",
+    "n_epochs": 6,
+    "time_span_yr": 0.8050709103354166,
+    "pmra_masyr": 273.506531437798,
+    "pmdec_masyr": 814.5771167593509,
+    "pmra_err": 933.1349119320854,
+    "pmdec_err": 920.1257467968477,
+    "reduced_chi2_linear": 0.5348557789271015,
+    "chi2_vs_reference": 5.150163382065779,
+    "dof_vs_reference": 10,
+    "p_value_vs_reference": 0.8809237311491376,
+    "z_pmra": 0.31522702470092967,
+    "z_pmdec": 0.878606317385749,
+    "error_scale": 1.0,
+    "chi2_static": 5.148493235940079,
+    "p_value_static": 0.8810402062622296,
+    "calibrated": true
+   },
+   "variability_combined": {
+    "combined_chi2": 3.7398565399658414,
+    "combined_dof": 1,
+    "combined_p_value": 0.05312900655349834
+   },
+   "controls": {
+    "n_stars": 16,
+    "frac_abs_z_gt_3": 0.0,
+    "z_std": 0.5695800649469006,
+    "z_median_abs": 0.27237976651872475
+   },
+   "calibration": {
+    "enabled": true,
+    "n_reference_stars": 41,
+    "frames_calibrated": 38,
+    "frames_usable": 80,
+    "median_stars_per_frame": 4.0,
+    "astrometric_floor_arcsec": 0.5799970513332124,
+    "photometric_floor_frac": 0.01910692475241582,
+    "gaia_gmax": 18.5,
+    "uncalibrated_exposure_extra_sigma_arcsec": [
+     0.17515072011276248,
+     0.20758312794874845
+    ]
+   },
+   "frame_status": {
+    "ok": 80
+   },
+   "centroid_failures": {
+    "S/N": 32,
+    "too": 41,
+    "predicted": 1
+   },
+   "detected_wavelengths_um": [
+    0.7525263858587032,
+    0.7586944427102245,
+    0.8195028512700934,
+    1.8250874633982779,
+    4.426533197520188,
+    4.479792242538895
+   ]
+  }
+ ],
+ "injection": [
+  {
+   "data_kind": "INJECTED synthetic source added to REAL SPHEREx cutouts",
+   "injected": {
+    "pmra_masyr": 2000.0,
+    "pmdec_masyr": -1500.0,
+    "target_snr": 5,
+    "sigma_px": 1.0,
+    "offset_arcsec": [
+     -233.74152172535554,
+     96.81890838836775
+    ],
+    "site_peak_noise_units": 1.8690926165308621,
+    "seed": 1
+   },
+   "epochs_tried": 80,
+   "epochs_recovered": 0,
+   "completeness": 0.0,
+   "fit_snr_median": 0.037500185670247946,
+   "fit_snr_over_injected": 0.007500037134049589,
+   "lost_epochs_by_reason": {
+    "S/N below threshold": 78,
+    "optimizer did not converge": 2
+   },
+   "host_job": "d0d365df16bc"
+  },
+  {
+   "data_kind": "INJECTED synthetic source added to REAL SPHEREx cutouts",
+   "injected": {
+    "pmra_masyr": 2000.0,
+    "pmdec_masyr": -1500.0,
+    "target_snr": 8,
+    "sigma_px": 1.0,
+    "offset_arcsec": [
+     -233.74152172535554,
+     96.81890838836775
+    ],
+    "site_peak_noise_units": 1.8690926165308621,
+    "seed": 1
+   },
+   "epochs_tried": 80,
+   "epochs_recovered": 11,
+   "completeness": 0.1375,
+   "fit_snr_median": 1.7184298637624713,
+   "fit_snr_over_injected": 0.2148037329703089,
+   "lost_epochs_by_reason": {
+    "S/N below threshold": 67,
+    "optimizer did not converge": 2
+   },
+   "motion": {
+    "ok": true,
+    "reason": "ok",
+    "n_epochs": 11,
+    "time_span_yr": 1.0220358412045698,
+    "pmra_masyr": 5066.826094722656,
+    "pmdec_masyr": -2536.892786377479,
+    "pmra_err": 1223.714771276636,
+    "pmdec_err": 1218.7178010214457,
+    "reduced_chi2_linear": 1.0070004724317654,
+    "chi2_vs_reference": 25.179759033081197,
+    "dof_vs_reference": 20,
+    "p_value_vs_reference": 0.1946403178323443,
+    "z_pmra": 2.5061608854514366,
+    "z_pmdec": -0.8508063027457434,
+    "error_scale": 1.003494131737583,
+    "chi2_static": 39.753427885464625,
+    "p_value_static": 0.005366360599060906
+   },
+   "recovered_within_3sigma": true,
+   "host_job": "d0d365df16bc"
+  },
+  {
+   "data_kind": "INJECTED synthetic source added to REAL SPHEREx cutouts",
+   "injected": {
+    "pmra_masyr": 2000.0,
+    "pmdec_masyr": -1500.0,
+    "target_snr": 12,
+    "sigma_px": 1.0,
+    "offset_arcsec": [
+     -233.74152172535554,
+     96.81890838836775
+    ],
+    "site_peak_noise_units": 1.8690926165308621,
+    "seed": 1
+   },
+   "epochs_tried": 80,
+   "epochs_recovered": 26,
+   "completeness": 0.325,
+   "fit_snr_median": 3.0106860696657565,
+   "fit_snr_over_injected": 0.2508905058054797,
+   "lost_epochs_by_reason": {
+    "S/N below threshold": 53,
+    "optimizer did not converge": 1
+   },
+   "motion": {
+    "ok": true,
+    "reason": "ok",
+    "n_epochs": 26,
+    "time_span_yr": 1.1027058343599947,
+    "pmra_masyr": 3072.9064063756095,
+    "pmdec_masyr": -1788.909551170266,
+    "pmra_err": 458.20977572838314,
+    "pmdec_err": 460.401681333104,
+    "reduced_chi2_linear": 0.8787441796415623,
+    "chi2_vs_reference": 48.05620467853065,
+    "dof_vs_reference": 50,
+    "p_value_vs_reference": 0.5517206885189452,
+    "z_pmra": 2.3415179317597214,
+    "z_pmdec": -0.6275162817253871,
+    "error_scale": 1.0,
+    "chi2_static": 102.25202348566675,
+    "p_value_static": 1.878454368200917e-05
+   },
+   "recovered_within_3sigma": true,
+   "host_job": "d0d365df16bc"
+  },
+  {
+   "data_kind": "INJECTED synthetic source added to REAL SPHEREx cutouts",
+   "injected": {
+    "pmra_masyr": 2000.0,
+    "pmdec_masyr": -1500.0,
+    "target_snr": 16,
+    "sigma_px": 1.0,
+    "offset_arcsec": [
+     -233.74152172535554,
+     96.81890838836775
+    ],
+    "site_peak_noise_units": 1.8690926165308621,
+    "seed": 1
+   },
+   "epochs_tried": 80,
+   "epochs_recovered": 34,
+   "completeness": 0.425,
+   "fit_snr_median": 4.335916549334918,
+   "fit_snr_over_injected": 0.2709947843334324,
+   "lost_epochs_by_reason": {
+    "S/N below threshold": 46
+   },
+   "motion": {
+    "ok": true,
+    "reason": "ok",
+    "n_epochs": 34,
+    "time_span_yr": 1.1027058343599947,
+    "pmra_masyr": 2612.661399076047,
+    "pmdec_masyr": -1780.937936790426,
+    "pmra_err": 327.83670656737576,
+    "pmdec_err": 330.87127386465045,
+    "reduced_chi2_linear": 0.7588834611573265,
+    "chi2_vs_reference": 52.78190331774544,
+    "dof_vs_reference": 66,
+    "p_value_vs_reference": 0.8807296725984757,
+    "z_pmra": 1.868800493669354,
+    "z_pmdec": -0.849085305922778,
+    "error_scale": 1.0,
+    "chi2_static": 141.05192048151645,
+    "p_value_static": 2.2492401973022072e-07
+   },
+   "recovered_within_3sigma": true,
+   "host_job": "d0d365df16bc"
+  },
+  {
+   "data_kind": "INJECTED synthetic source added to REAL SPHEREx cutouts",
+   "injected": {
+    "pmra_masyr": 2000.0,
+    "pmdec_masyr": -1500.0,
+    "target_snr": 20,
+    "sigma_px": 1.0,
+    "offset_arcsec": [
+     -233.74152172535554,
+     96.81890838836775
+    ],
+    "site_peak_noise_units": 1.8690926165308621,
+    "seed": 1
+   },
+   "epochs_tried": 80,
+   "epochs_recovered": 49,
+   "completeness": 0.6125,
+   "fit_snr_median": 5.67992576245644,
+   "fit_snr_over_injected": 0.283996288122822,
+   "lost_epochs_by_reason": {
+    "S/N below threshold": 31
+   },
+   "motion": {
+    "ok": true,
+    "reason": "ok",
+    "n_epochs": 49,
+    "time_span_yr": 1.1027058343599947,
+    "pmra_masyr": 2551.554179899449,
+    "pmdec_masyr": -1768.9881447349555,
+    "pmra_err": 248.92363478721376,
+    "pmdec_err": 251.466456138417,
+    "reduced_chi2_linear": 0.5961217031511743,
+    "chi2_vs_reference": 62.08923035249401,
+    "dof_vs_reference": 96,
+    "p_value_vs_reference": 0.9971553497834316,
+    "z_pmra": 2.215756572777557,
+    "z_pmdec": -1.0696780352560977,
+    "error_scale": 1.0,
+    "chi2_static": 210.59193867194648,
+    "p_value_static": 1.4533277875285548e-10
+   },
+   "recovered_within_3sigma": true,
+   "host_job": "d0d365df16bc"
+  },
+  {
+   "data_kind": "INJECTED synthetic source added to REAL SPHEREx cutouts",
+   "injected": {
+    "pmra_masyr": 2000.0,
+    "pmdec_masyr": -1500.0,
+    "target_snr": 30,
+    "sigma_px": 1.0,
+    "offset_arcsec": [
+     -233.74152172535554,
+     96.81890838836775
+    ],
+    "site_peak_noise_units": 1.8690926165308621,
+    "seed": 1
+   },
+   "epochs_tried": 80,
+   "epochs_recovered": 77,
+   "completeness": 0.9625,
+   "fit_snr_median": 9.25543634494598,
+   "fit_snr_over_injected": 0.3085145448315327,
+   "lost_epochs_by_reason": {
+    "S/N below threshold": 3
+   },
+   "motion": {
+    "ok": true,
+    "reason": "ok",
+    "n_epochs": 77,
+    "time_span_yr": 1.1027058343599947,
+    "pmra_masyr": 2309.5548623240975,
+    "pmdec_masyr": -1711.8679625918012,
+    "pmra_err": 161.17748030971205,
+    "pmdec_err": 162.68205626030482,
+    "reduced_chi2_linear": 0.46558119177559926,
+    "chi2_vs_reference": 75.2219212179891,
+    "dof_vs_reference": 152,
+    "p_value_vs_reference": 0.9999999748450266,
+    "z_pmra": 1.9205838292624349,
+    "z_pmdec": -1.3023437708015864,
+    "error_scale": 1.0,
+    "chi2_static": 385.8939807458826,
+    "p_value_static": 2.684746113172003e-22
+   },
+   "recovered_within_3sigma": true,
+   "host_job": "d0d365df16bc"
+  },
+  {
+   "data_kind": "INJECTED synthetic source added to REAL SPHEREx cutouts",
+   "injected": {
+    "pmra_masyr": 2000.0,
+    "pmdec_masyr": -1500.0,
+    "target_snr": 40,
+    "sigma_px": 1.0,
+    "offset_arcsec": [
+     -233.74152172535554,
+     96.81890838836775
+    ],
+    "site_peak_noise_units": 1.8690926165308621,
+    "seed": 1
+   },
+   "epochs_tried": 80,
+   "epochs_recovered": 78,
+   "completeness": 0.975,
+   "fit_snr_median": 12.892914484041126,
+   "fit_snr_over_injected": 0.3223228621010282,
+   "lost_epochs_by_reason": {
+    "S/N below threshold": 2
+   },
+   "motion": {
+    "ok": true,
+    "reason": "ok",
+    "n_epochs": 78,
+    "time_span_yr": 1.1027058343599947,
+    "pmra_masyr": 2228.941514946305,
+    "pmdec_masyr": -1657.3464821355808,
+    "pmra_err": 129.88820364034078,
+    "pmdec_err": 131.0587513797156,
+    "reduced_chi2_linear": 0.41282950628956133,
+    "chi2_vs_reference": 67.29825176433468,
+    "dof_vs_reference": 154,
+    "p_value_vs_reference": 0.999999999889433,
+    "z_pmra": 1.762604366908035,
+    "z_pmdec": -1.2005797436578802,
+    "error_scale": 1.0,
+    "chi2_static": 517.1484993583467,
+    "p_value_static": 8.587312083745693e-41
+   },
+   "recovered_within_3sigma": true,
+   "host_job": "d0d365df16bc"
+  }
+ ],
+ "reproduce": {
+  "old_job": "d0d365df16bc",
+  "new_job": "880ebb08f0b4",
+  "files_compared": 80,
+  "hash_mismatches": [],
+  "only_in_old": [],
+  "only_in_new": [],
+  "motion_values": {
+   "pmra_masyr": [
+    -764.7802464969277,
+    -764.7802464969277
+   ],
+   "pmdec_masyr": [
+    10264.535412156978,
+    10264.535412156978
+   ],
+   "pmra_err": [
+    182.73632774528818,
+    182.73632774528818
+   ],
+   "pmdec_err": [
+    182.77790509622184,
+    182.77790509622184
+   ],
+   "chi2_static": [
+    10429.956437252675,
+    10429.956437252675
+   ]
+  },
+  "identical_results": true
+ },
+ "finished_utc": "2026-11-14T21:58:06Z"
+}

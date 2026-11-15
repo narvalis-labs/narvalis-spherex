@@ -1,0 +1,20 @@
+services:
+  epochlab:
+    build: .
+    image: epochlab:latest
+    container_name: epochlab
+    restart: unless-stopped
+    ports:
+      - "8000:8000"          # LAN access now; the NanoPi reverse proxy will point here later
+    environment:
+      EPOCHLAB_DATA: /data
+      # "auto" = every SPHEREx collection IRSA advertises (cubes excluded). Or a comma-separated list, priority order.
+      EPOCHLAB_COLLECTIONS: ${EPOCHLAB_COLLECTIONS:-auto}
+      EPOCHLAB_PARALLEL: "4"
+      # Public IPs (CIDR, comma-separated) allowed to delete analyses when using the domain. Empty = local network only.
+      EPOCHLAB_TRUSTED_NETS: ${EPOCHLAB_TRUSTED_NETS:-}
+    volumes:
+      - ./data:/data
+      - ./validation:/app/validation   # selftest_real.py writes REPORT.md here
+    mem_limit: 6g
+    cpus: 6
