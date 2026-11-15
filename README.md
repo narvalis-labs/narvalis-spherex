@@ -56,13 +56,13 @@ qm create 240 --name epochlab --memory 16384 --cores 6 --cpu host --net0 virtio,
 qm start 240     # install Debian 13 minimal + SSH server
 
 # Inside the VM, as root
-git clone https://github.com/<you>/epochlab.git /opt/epochlab   # or unzip epochlab.zip into /opt
+git clone https://github.com/narvalis-labs/narvalis-spherex.git /opt/epochlab   # or extract the project ZIP to /opt/epochlab
 bash /opt/epochlab/deploy/setup-debian.sh                        # LAN only: http://<VM_IP>:8000
 # later, behind the NanoPi:  NANOPI_IP=192.168.1.2 bash /opt/epochlab/deploy/setup-debian.sh
 ```
 
 Then on the NanoPi: copy `deploy/nginx-nanopi.conf`, set `VM_IP`, add the `limit_req_zone` line,
-`certbot --nginx -d spherex.pitipo-app.com`, reload nginx.
+`certbot --nginx -d narvalis.pitipo-app.com`, reload nginx.
 
 Without Docker: see `deploy/epochlab.service` (venv + systemd, Python ≥ 3.12).
 
@@ -138,6 +138,9 @@ false-motion rate on static sources, flag handling, λ-matching vs naive compari
 2-D `-TAB` spectral WCS, per-exposure WCS errors removed by field-star calibration (reproducing the failure first seen on real data), association gate, injection–recovery, PSF-wing photometry of saturated stars, SIMBAD→Sesame name-resolution fallback, end-to-end pipeline, reproducibility, API (incl. path traversal / bad IDs).
 
 ## Credits and licences
+
+Narvalis source code and accompanying software documentation are available under the [MIT License](LICENSE).
+Third-party software, fonts and data remain subject to their respective licences and terms of use.
 
 Full bibliography: `docs/REFERENCES.md`.
 
